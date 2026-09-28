@@ -1,5 +1,7 @@
 #include QMK_KEYBOARD_H
 
+#include "max7221.h"
+
 enum custom_layers {
     _BASE = 0,
     _CMD
@@ -33,6 +35,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 static uint8_t saved_mods;
 static uint16_t translated_key = KC_NO;
 static uint16_t translated_from = KC_NO;
+
+void keyboard_post_init_user(void) {
+    max7221_init();
+
+    max7221_set_brightness(12);
+
+    for (uint8_t row = 0; row < 8; ++row) {
+        for (uint8_t col = 0; col < 8; ++col) {
+            max7221_set_led(row, col, true);
+        }
+    }
+    
+    max7221_flush();
+}
 
 static uint16_t get_shifted_key(uint16_t keycode) {
     switch (keycode) {
