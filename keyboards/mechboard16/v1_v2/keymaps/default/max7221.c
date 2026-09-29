@@ -1,3 +1,10 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * Copyright (C) 2026 SukkoPera
+ * 
+ */
+
 #include "max7221.h"
 #include "quantum.h"
 

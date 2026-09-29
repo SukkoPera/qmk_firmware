@@ -1,3 +1,10 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * Copyright (C) 2026 SukkoPera
+ * 
+ */
+
 #include QMK_KEYBOARD_H
 
 #include "max7221.h"
