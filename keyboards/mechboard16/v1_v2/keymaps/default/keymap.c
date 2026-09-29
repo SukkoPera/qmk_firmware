@@ -28,13 +28,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_CMD] = LAYOUT(
-        /* ROW 0 */ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MUTE,
+        /* ROW 0 */ EE_CLR,  KC_TRNS, LM_PREV, KC_TRNS, MS_BTN1, MS_BTN2, KC_TRNS, KC_MUTE,
         /* ROW 1 */ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         /* ROW 2 */ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         /* ROW 3 */ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         /* ROW 4 */ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        /* ROW 5 */ MS_DOWN, KC_TRNS, KC_TRNS, MS_UP,   KC_TRNS, KC_TRNS, KC_VOLD, KC_TRNS,
-        /* ROW 6 */ MS_LEFT, KC_TRNS, KC_TRNS, MS_RGHT, KC_TRNS, KC_TRNS, KC_VOLU, KC_TRNS,
+        /* ROW 5 */ MS_DOWN, KC_TRNS, KC_TRNS, MS_UP,   LM_SPDU, LM_BRID, KC_VOLD, LM_SPDD,
+        /* ROW 6 */ MS_LEFT, KC_TRNS, LM_BRIU, MS_RGHT, KC_TRNS, LM_NEXT, KC_VOLU, LM_TOGG,
         /* ROW 7 */ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
     )
 };
@@ -43,19 +43,10 @@ static uint8_t saved_mods;
 static uint16_t translated_key = KC_NO;
 static uint16_t translated_from = KC_NO;
 
-void keyboard_post_init_user(void) {
-    max7221_init();
-
-    max7221_set_brightness(12);
-
-    for (uint8_t row = 0; row < 8; ++row) {
-        for (uint8_t col = 0; col < 8; ++col) {
-            max7221_set_led(row, col, true);
-        }
-    }
-    
-    max7221_flush();
-}
+//~ void keyboard_post_init_user(void) {
+        //~ led_matrix_enable();
+        //~ led_matrix_mode(LED_MATRIX_SOLID);
+//~ }
 
 static uint16_t get_shifted_key(uint16_t keycode) {
     switch (keycode) {

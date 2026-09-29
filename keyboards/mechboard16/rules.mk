@@ -1,0 +1,5 @@
+CONSOLE_ENABLE = yes
+LED_MATRIX_ENABLE = yes
+#~ LED_MATRIX_DRIVER = custom
+
+SRC += max7221.c
