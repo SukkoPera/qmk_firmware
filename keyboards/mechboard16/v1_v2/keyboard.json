@@ -8,6 +8,8 @@
         "bootmagic": true,
         "extrakey": true,
         "mousekey": true,
+        "console": true,
+		"led_matrix": true
         "nkro": true
     },
     "bootmagic": {
@@ -177,7 +179,6 @@
                 { "matrix": [7, 6], "x": 22,  "y": 16, "flags": 4 },
                 { "matrix": [7, 7], "x": 0,   "y": 32, "flags": 4 }
             ],
-
         "animations": {
             "solid": true,
             "band": true,
@@ -186,11 +187,10 @@
             "solid_reactive_multicross": true,
             "solid_reactive_multinexus": true
         },
-
-            "default": {
-                "on": true,
-                "animation": "band",
-                "val": 222
-            }
-        }
+		"default": {
+			"on": true,
+			"animation": "band",
+			"val": 222
+		}
+	}
 }

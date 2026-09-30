@@ -8,15 +8,19 @@
         "bootmagic": true,
         "extrakey": true,
         "mousekey": true,
+        "console": true,
         "dip_switch": true,
         "nkro": true
+    },
+	"bootmagic": {
+        "matrix": [6, 4]
     },
     "matrix_pins": {
         "cols": ["D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7"],
         "rows": ["B0", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "NO_PIN"]
     },
     "processor": "atmega32u4",
-    "url": "tbd",
+    "url": "https://github.com/SukkoPera/MechBoard16",
     "usb": {
         "device_version": "1.0.0",
         "pid": "0x0000",
@@ -110,7 +114,7 @@
                 { "matrix": [ 8, 7 ], "x": 0, "y": 0, "label": "N/A" }
             ]
         },
-			"LAYOUT_c64": {
+		"LAYOUT_c64": {
             "layout": [
                 { "matrix": [ 0, 0 ], "x": 15.25, "y": 0, "label": "INST/DEL" },
                 { "matrix": [ 0, 1 ], "x": 14, "y": 2, "label": "RETURN", "w": 2 },
