@@ -14,8 +14,8 @@ enum custom_layers {
 
 // POSITIONAL
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_BASE] = LAYOUT_c64(
-        /* ROW 0 */ KC_BSPC, KC_ENT,  KC_RGHT, KC_F7,   KC_F1,   KC_F3,             KC_F5,   KC_DOWN,
+    [_BASE] = LAYOUT_c16(
+        /* ROW 0 */ KC_BSPC, KC_ENT,  KC_EQL,  KC_F8,   KC_F1,   KC_F2,             KC_F3,   KC_LBRC,
         /* ROW 1 */ KC_3,    KC_W,    KC_A,    KC_4,    KC_Z,    KC_S,              KC_E,    KC_LSFT,
         /* ROW 2 */ KC_5,    KC_R,    KC_D,    KC_6,    KC_C,    KC_F,              KC_T,    KC_X,
         /* ROW 3 */ KC_7,    KC_Y,    KC_G,    KC_8,    KC_B,    KC_H,              KC_U,    KC_V,
@@ -25,19 +25,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         /* ROW 7 */ KC_1,    KC_HOME, KC_TAB,  KC_2,    KC_SPC,  LT(_CMD, KC_LCTL), KC_Q,    KC_ESC,
         
         // The following row is fictional, it does not exist in the matrix and is only used to simulate extra keys
-        /* ROW 8 */ KC_CAPS, KC_GRV,  KC_NO,   KC_NO,   KC_NO,   KC_NO,             KC_NO,   KC_NO
+        /* ROW 8 */ KC_CAPS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO
     ),
 
-    [_CMD] = LAYOUT_c64(
-        /* ROW 0 */ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MUTE,
+    [_CMD] = LAYOUT_c16(
+        /* ROW 0 */ EE_CLR,  KC_TRNS, RM_PREV, KC_TRNS, MS_BTN1, MS_BTN2, KC_TRNS, KC_MUTE,
         /* ROW 1 */ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         /* ROW 2 */ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         /* ROW 3 */ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         /* ROW 4 */ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        /* ROW 5 */ MS_DOWN, KC_TRNS, KC_TRNS, MS_UP,   KC_TRNS, KC_TRNS, KC_VOLD, KC_TRNS,
-        /* ROW 6 */ MS_LEFT, KC_TRNS, KC_TRNS, MS_RGHT, KC_TRNS, KC_TRNS, KC_VOLU, KC_TRNS,
+        /* ROW 5 */ MS_DOWN, KC_TRNS, KC_TRNS, MS_UP,   RM_SPDU, RM_VALD, KC_VOLD, RM_SPDD,
+        /* ROW 6 */ MS_LEFT, KC_TRNS, RM_VALU, MS_RGHT, KC_TRNS, RM_NEXT, KC_VOLU, RM_TOGG,
         /* ROW 7 */ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         
-        /* ROW 8 */ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+        /* ROW 8 */ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
     )
 };
