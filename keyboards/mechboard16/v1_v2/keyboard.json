@@ -9,15 +9,18 @@
         "extrakey": true,
         "mousekey": true,
         "console": true,
-		"led_matrix": true
+        "led_matrix": true,
         "nkro": true
     },
     "bootmagic": {
         "matrix": [6, 4]
     },
+    "matrix_size": {
+        "rows": 8,
+        "cols": 8
+    },
     "matrix_pins": {
-        "cols": ["D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7"],
-        "rows": ["B0", "B1", "B2", "B3", "B4", "B5", "B6", "B7"]
+        "custom_lite": true,
     },
     "processor": "atmega32u4",
     "url": "https://github.com/SukkoPera/MechBoard16",

@@ -80,7 +80,7 @@ static void max7221_write(uint8_t reg, uint8_t data) {
 /*********************/
 
 static void max7221_set_value(int index, uint8_t value) {
-    uprintf ("LED %d = %d\n", index, value);
+//    uprintf ("LED %d = %d\n", index, value);
 
     if (index < 0 || index >= 64)
         return;
@@ -117,7 +117,7 @@ static void max7221_flush(void)
         uint8_t data = 0;
 
         for (uint8_t col = 0; col < 8; col++) {
-            uprintf ("row %d, col %d\n", row, col);
+//            uprintf ("row %d, col %d\n", row, col);
 //            uint8_t effectiveRow = row;
 //            uint8_t effectiveCol = (col + 8 - 1) % 8;
 //            uint8_t v = led_buffer[effectiveRow * 8 + effectiveCol];
@@ -134,7 +134,7 @@ static void max7221_flush(void)
     }
 
     uint8_t avg = on ? sum / on : 0;     // media 0-255 su tutti i LED accesi
-    uprintf ("sum = %u, on = %d, brightness = %d\n", sum, on, avg >> 4);
+//    uprintf ("sum = %u, on = %d, brightness = %d\n", sum, on, avg >> 4);
     max7221_set_brightness(avg >> 4);    // scala 0-255 -> 0-15
 }
 
@@ -148,15 +148,17 @@ static void max7221_init(void)
     mosi_low();
     ss_high();
 
+    max7221_write(0x0F, 0x00);  // display test off
+    max7221_write(0x0C, 0x00);  // shutdown while configuring
     max7221_write(0x09, 0x00);  // no decode
     max7221_write(0x0B, 0x07);  // scan digits 0..7
+    //max7221_write(0x0A, 0x0C);  // intensity
+
+    for (uint8_t i = 1; i <= 8; i++) {
+        max7221_write(i, 0x00); // clear digits
+    }
+
     max7221_write(0x0C, 0x01);  // normal operation
-//    max7221_set_brightness(12);  // initial intensity
-
-    /* Clear display */
-    max7221_set_value_all(0);
-
-    max7221_set_value(0, 255);
 
     max7221_flush();
 }
