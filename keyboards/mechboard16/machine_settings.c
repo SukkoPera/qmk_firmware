@@ -86,60 +86,63 @@ typedef union {
 
 static user_config_t user_config;
 
+static void machine_configuration_apply(const uint8_t newConfiguration) {
+    //~ uprintf("Setting configuration %d\n", newConfiguration);
+    const struct machine_settings *oldSettingsPgmPtr = (const struct machine_settings *) pgm_read_ptr (&machine_settings[user_config.machine_config]);
+    const struct machine_settings *newSettingsPgmPtr = (const struct machine_settings *) pgm_read_ptr (&machine_settings[newConfiguration]);
+    struct machine_settings oldSettings, newSettings;
+    memcpy_P (&oldSettings, oldSettingsPgmPtr, sizeof(struct machine_settings));
+    memcpy_P (&newSettings, newSettingsPgmPtr, sizeof(struct machine_settings));
+    uint32_t start = timer_read32();
+
+    if (newSettings.force_reset || newSettings.rom_slot != oldSettings.rom_slot) {
+//			Log.info (F("Reset start\n"));
+        gpio_set_pin_output(PIN_RESET);
+        gpio_write_pin_low(PIN_RESET);
+    }
+
+    clockgen_set_clock (0, newSettings.clock0);
+    clockgen_set_clock (1, newSettings.clock1);
+    clockgen_set_clock (2, newSettings.clock2);
+
+    gpio_write_pin (PIN_ROMSWITCH, newSettings.rom_slot == 0 ? 0 : 1);
+
+//		SoftPWMSet (PIN_LED_R, newSettings.color.r);
+//		SoftPWMSet (PIN_LED_G, newSettings.color.g);
+//		SoftPWMSet (PIN_LED_B, newSettings.color.b);
+
+    if (newSettings.force_reset || newSettings.rom_slot != oldSettings.rom_slot) {
+        while (timer_elapsed32(start) < RESET_LENGTH_MS)
+            ;
+//			Log.info (F("Reset end\n"));
+        gpio_set_pin_input_high(PIN_RESET);
+    }
+}
+
 void eeconfig_init_kb(void) {  // EEPROM is getting reset!
     user_config.raw = 0;
     user_config.machine_config = 0;
     eeconfig_update_user(user_config.raw); // Write default value to EEPROM now
 
-    machine_configuration_set (0);
+    machine_configuration_apply (0);
 }
 
 void machine_configuration_init(void) {
      // Read the user config from EEPROM
     user_config.raw = eeconfig_read_kb();
 
-	if (user_config.machine_config <= MACHINE_SETTINGS_NO) {
-		machine_configuration_set (user_config.machine_config);
+	if (user_config.machine_config < MACHINE_SETTINGS_NO) {
+		machine_configuration_apply (user_config.machine_config);
 	} else {
 		// Default configuration
-		machine_configuration_set (0);
+		machine_configuration_apply (0);
 	}
 }
 
 void machine_configuration_set (const uint8_t newConfiguration) {
 	if (newConfiguration != user_config.machine_config && newConfiguration < MACHINE_SETTINGS_NO) {
-		uprintf("Setting configuration %d\n", newConfiguration);
-		const struct machine_settings *oldSettingsPgmPtr = (const struct machine_settings *) pgm_read_ptr (&machine_settings[user_config.machine_config]);
-		const struct machine_settings *newSettingsPgmPtr = (const struct machine_settings *) pgm_read_ptr (&machine_settings[newConfiguration]);
-		struct machine_settings oldSettings, newSettings;
-		memcpy_P (&oldSettings, oldSettingsPgmPtr, sizeof(struct machine_settings));
-		memcpy_P (&newSettings, newSettingsPgmPtr, sizeof(struct machine_settings));
-        uint32_t start = timer_read32();
-
-		if (newSettings.force_reset || newSettings.rom_slot != oldSettings.rom_slot) {
-//			Log.info (F("Reset start\n"));
-            gpio_set_pin_output(PIN_RESET);
-            gpio_write_pin_low(PIN_RESET);
-		}
-
-		clockgen_set_clock (0, newSettings.clock0);
-		clockgen_set_clock (1, newSettings.clock1);
-		clockgen_set_clock (2, newSettings.clock2);
-
-		gpio_write_pin (PIN_ROMSWITCH, newSettings.rom_slot == 0 ? 0 : 1);
-
-//		SoftPWMSet (PIN_LED_R, newSettings.color.r);
-//		SoftPWMSet (PIN_LED_G, newSettings.color.g);
-//		SoftPWMSet (PIN_LED_B, newSettings.color.b);
-
-		if (newSettings.force_reset || newSettings.rom_slot != oldSettings.rom_slot) {
-            while (timer_elapsed32(start) < RESET_LENGTH_MS)
-				;
-//			Log.info (F("Reset end\n"));
-            gpio_set_pin_input_high(PIN_RESET);
-		}
-
-		user_config.machine_config = newConfiguration;
-		eeconfig_update_kb(user_config.raw);
+        machine_configuration_apply (newConfiguration);
+        user_config.machine_config = newConfiguration;
+        eeconfig_update_kb(user_config.raw);
 	}
 }
