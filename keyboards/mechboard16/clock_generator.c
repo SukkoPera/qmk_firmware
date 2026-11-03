@@ -42,6 +42,7 @@ static void clockgen_set_frequency (enum si5351_clock clockId, uint64_t freq) {
 		si5351_set_freq (freq, clockId);
 		si5351_output_enable (clockId, 0);
 		si5351_set_clock_pwr (clockId, 0);
+		//~ si5351_set_clock_disable	TBD
 	} else {
 		si5351_set_clock_pwr (clockId, 1);
 		si5351_set_freq (freq * SI5351_FREQ_MULT, clockId);

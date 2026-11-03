@@ -13,11 +13,13 @@
 
 void keyboard_post_init_kb(void) {
     // These are always outputs
-    gpio_set_pin_output(PIN_RESET);
     gpio_set_pin_output(PIN_ROMSWITCH);
     gpio_set_pin_output(PIN_LED_R);
     gpio_set_pin_output(PIN_LED_G);
     gpio_set_pin_output(PIN_LED_B);
+
+    // This is an open-collector-style output
+    gpio_set_pin_input_high(PIN_RESET);
 
     // Init clock generator
     clockgen_init();

@@ -138,7 +138,7 @@ static bool matrix_scan_passive(matrix_row_t matrix[]) {
 
     static bool last = false;
     if (last != matrix_has_changed) {
-	uprintf("Scan, changed = %d\n", matrix_has_changed);
+//	uprintf("Scan, changed = %d\n", matrix_has_changed);
 	last = matrix_has_changed;
     }
 
@@ -150,7 +150,7 @@ static bool matrix_scan_active(matrix_row_t matrix[]) {
 
     /* Scan all rows */
     for (uint8_t row = 0; row < ARRAY_SIZE(pins_port_b); ++row) {
-	uprintf ("row = %d\n", row);
+//	uprintf ("row = %d\n", row);
         // Set a single row to ground
 	gpio_set_pin_output(pins_port_b[row]);
         gpio_write_pin_low(pins_port_b[row]);
