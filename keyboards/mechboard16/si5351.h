@@ -36,8 +36,10 @@
 
 /* Define definitions */
 
+#define SI5351_NCLOCKS					3			// for 10-Pin MSOP, 8 for others
+
 #define SI5351_BUS_BASE_ADDR            0x60
-#define SI5351_XTAL_FREQ                25000000
+//~ #define SI5351_XTAL_FREQ                25000000
 #define SI5351_PLL_FIXED                80000000000ULL
 #define SI5351_FREQ_MULT                100ULL
 #define SI5351_DEFAULT_CLK              1000000000ULL
@@ -236,8 +238,9 @@ enum si5351_variant {
 };
 */
 
-enum si5351_clock {SI5351_CLK0, SI5351_CLK1, SI5351_CLK2, SI5351_CLK3,
-	SI5351_CLK4, SI5351_CLK5, SI5351_CLK6, SI5351_CLK7};
+enum si5351_clock {SI5351_CLK0, SI5351_CLK1, SI5351_CLK2,
+	//~ SI5351_CLK3, SI5351_CLK4, SI5351_CLK5, SI5351_CLK6, SI5351_CLK7
+};
 
 enum si5351_pll {SI5351_PLLA, SI5351_PLLB};
 
@@ -315,8 +318,8 @@ public:
     .LOS = 0, .REVID = 0};
 	struct Si5351IntStatus dev_int_status = {.SYS_INIT_STKY = 0, .LOL_B_STKY = 0,
     .LOL_A_STKY = 0, .LOS_STKY = 0};
-	enum si5351_pll pll_assignment[8];
-	uint64_t clk_freq[8];
+	enum si5351_pll pll_assignment[SI5351_NCLOCKS];
+	uint64_t clk_freq[SI5351_NCLOCKS];
 	uint64_t plla_freq;
 	uint64_t pllb_freq;
   enum si5351_pll_input plla_ref_osc;
@@ -334,7 +337,7 @@ private:
 	int32_t ref_correction[2];
   uint8_t clkin_div;
   uint8_t i2c_bus_addr;
-  bool clk_first_set[8];
+  bool clk_first_set[SI5351_NCLOCKS];
 #endif
 //};
 
