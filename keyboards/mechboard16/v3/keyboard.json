@@ -9,7 +9,7 @@
 		"extrakey": true,
 		"console": false,
 		"dip_switch": true,
-		"rgb_matrix": false,
+		"rgb_matrix": true,
 		"nkro": true
 	},
 	"bootmagic": {
@@ -283,11 +283,15 @@
 			"gradient_up_down": true,
 			"gradient_left_right": true,
 			"breathing": true,
-			"band_sat": true,
-			"band_pinwheel_sat": true,
-			"band_spiral_sat": true,
+			"cycle_left_right": true,
+			"cycle_up_down": true,
+			"rainbow_moving_chevron": true,
+			"cycle_out_in": true,
+			"cycle_pinwheel": true,
+			"cycle_spiral": true,
+			"dual_beacon": true,
 			"typing_heatmap": true,
-			"solid_reactive_simple": true,
+			"solid_reactive_simple": true
 		},
 		"default": {
 			"on": true,

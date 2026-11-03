@@ -132,11 +132,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	switch (keycode) {
 		case KC_SPC:
 			for (uint8_t col = 2; col <= 5; ++col) {
-				//~ rgb_matrix_handle_key_event(FAKE_KEYS_ROW, col, record->event.pressed);
+				rgb_matrix_handle_key_event(FAKE_KEYS_ROW, col, record->event.pressed);
 			}
 			break;
 		case KC_LSFT:
-			//~ rgb_matrix_handle_key_event(FAKE_KEYS_ROW, FAKE_KEY_RSHIFT_COL, record->event.pressed);
+			rgb_matrix_handle_key_event(FAKE_KEYS_ROW, FAKE_KEY_RSHIFT_COL, record->event.pressed);
 			break;
 		case KC_RESET:
 			reset();
